@@ -84,9 +84,9 @@ function dragDrop(e) {
     const opponentGo = playerGo === "white" ? "black" : "white"
     const takenByOpponent = e.target.firstChild?.classList.contains(opponentGo)
     const valid = checkIfValid(e.target)
-    const moveSound = new Audio('sound/moves.mp3')
-    const errorSound = new Audio('sound/error.wav')
-    const takenSound = new Audio('sound/taken.mp3')
+    const moveSound = new Audio('js/sound/moves.mp3')
+    const errorSound = new Audio('js/sound/error.wav')
+    const takenSound = new Audio('js/sound/taken.mp3')
 
    
     if(correctGo){
