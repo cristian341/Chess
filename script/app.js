@@ -3,8 +3,8 @@ const playerDisplay = document.querySelector("#player");
 const infoDisplay = document.querySelector("#info-display");
 
 const width = 8;
-let playerGo = "black"
-playerDisplay.textContent = "black"
+let playerGo = "white"
+playerDisplay.textContent = "white"
 
 const startPieces = [
     rook,knight,bishop,queen,king,bishop,knight,rook,
@@ -18,28 +18,42 @@ const startPieces = [
 ];
 
 function createBoard() {
+    // Loop through each start piece and create a square for it
     startPieces.forEach((startPiece, i) => {
-        const square = document.createElement("div");
-        square.classList.add("square");
-        square.innerHTML = startPiece;
-        square.firstChild?.setAttribute("draggable",true)
-        square.setAttribute("square-id",i);
-        const row = Math.floor((63 - i) / 8 + 1)
-        if(row % 2 === 0){
+      // Create a new div element for the square
+      const square = document.createElement("div");
+      // Add the "square" class to the square element
+      square.classList.add("square");
+      // Set the innerHTML of the square to the start piece
+      square.innerHTML = startPiece;
+      // Set the "draggable" attribute of the first child element of the square to true if it exists
+      if (square.firstChild) {
+        square.firstChild.setAttribute("draggable", true);
+      }
+      // Set the "square-id" attribute of the square to the current index
+      square.setAttribute("square-id", i);
+      // Calculate the row number of the square based on its index
+      const row = Math.floor((63 - i) / 8 + 1);
+      // Add the appropriate background color class to the square based on its row and index
+      if (row % 2 === 0) {
             square.classList.add(i % 2 === 0 ? "whiteSquare" : "blackSquare");
         } else {
             square.classList.add(i % 2 === 0 ? "blackSquare" : "whiteSquare");
         }
-        if (i <= 15){
-            square.firstChild.firstChild.classList.add("black");
-        } 
-        if (i >= 48){
-            square.firstChild.firstChild.classList.add("white");
-        }
-        gameBoard.append(square);
-    })
-}
-
+      // Add the appropriate piece color class to the square based on its index
+      if (i <= 15) {
+        square.querySelector("svg").classList.add("black");
+      } 
+      if (i >= 48) {
+        square.querySelector("svg").classList.add("white");
+      }
+      // Append the square to the game board element
+      gameBoard.append(square);
+    });
+    //makes white go first
+    reverseIds()
+  }
+  
 createBoard()
 
 const allSquars = document.querySelectorAll(".square");
@@ -70,26 +84,32 @@ function dragDrop(e) {
     const opponentGo = playerGo === "white" ? "black" : "white"
     const takenByOpponent = e.target.firstChild?.classList.contains(opponentGo)
     const valid = checkIfValid(e.target)
-    //changePlayer()
+    const moveSound = new Audio('../sound/moves.mp3')
+    const errorSound = new Audio('../sound/error.wav')
+    const takenSound = new Audio('../sound/taken.mp3')
+
 
     if(correctGo){
         if(takenByOpponent && valid){
             e.target.parentNode.append(draggedElement)
             e.target.remove();
+            takenSound.play()
             checkForWin();
             changePlayer();
             return
         }
 
         else if (taken && !takenByOpponent){
+            errorSound.play()
             infoDisplay.textContent = "You cannont move here"
-            alert("You cannont move there")
             setTimeout(() => infoDisplay.textContent = "",2000 )
+            //alert("You cannont move there")
             return
         }
 
         else if (valid){
             e.target.append(draggedElement)
+            moveSound.play()
             checkForWin()
             changePlayer()
             playerDisplay.textContent = playerGo
@@ -97,8 +117,9 @@ function dragDrop(e) {
         } 
         playerDisplay.textContent = playerGo // update player display
     } else {
-        alert(`It's ${playerGo}'s turn. You cannot move now`);
-
+        errorSound.play()
+        setTimeout(() => alert(`It's ${playerGo}'s turn. You cannot move now`), 500 )
+        
     }
     
     
@@ -116,7 +137,7 @@ function checkIfValid(target){
                 //moves 2 slaces forward
                 starterRow.includes(startId) && startId + width *2  === targetId ||
                 //moves 1 space forward
-                startId + width === targetId ||
+                startId + width === targetId && !document.querySelector(`[square-id="${startId + width}"]`).firstChild||
                 //moves diagonaly to the left only if there is an opponent
                 startId + width - 1 === targetId && document.querySelector(`[square-id="${startId + width - 1}"]`).firstChild ||
                 //moves diagolany to the right only if there is an opponent
@@ -347,12 +368,13 @@ function changePlayer() {
     if(playerGo === "black"){
         reverseIds()
         playerGo = "white"
-        playerDisplay.textContent = 'white'
+        document.body.style.backgroundColor = playerGo;
 
     } else if (playerGo === "white") {
         revertIds()
         playerGo = "black"
-        playerDisplay.textContent = 'black'
+       // playerDisplay.textContent = 'black'
+        document.body.style.backgroundColor = playerGo;
     }
 }
 
@@ -370,18 +392,23 @@ function revertIds() {
 
 
 function checkForWin(){
+    const winSound = new Audio('../sound/winning.mp3')
     const kings = Array.from(document.querySelectorAll('#king'))
     if (!kings.some(king => king.firstChild.classList.contains("white"))) {
         infoDisplay.innerHTML = "Black player wins!"
         const allSquares = document.querySelectorAll(".square")
         allSquares.forEach(square => square.firstChild?.setAttribute("draggable", false))
+        winSound.play()
     }
     if (!kings.some(king => king.firstChild.classList.contains("black"))) {
         infoDisplay.innerHTML = "White player wins!"
         const allSquares = document.querySelectorAll(".square")
         allSquares.forEach(square => square.firstChild?.setAttribute("draggable", false))
+        winSound.play()
     }
 }
 
-
+function reset(){
+    window.location.reload();
+}
 

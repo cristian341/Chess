@@ -1,51 +1,127 @@
-#gameboard{
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* set the height of the body to the full viewport height */
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #form-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+  }
+  
+  label {
+    color: #555;
+  }
+  
+  input,
+  button {
+    padding: 10px 15px;  
+    border: 2px solid #d8d282;
+    border-radius: 4px;
+  }
+  
+  input {
+    width: 100%;
+  }
+  
+  button {
+    background: #1da1f2;
+    color: #d8d282;
+    border: 0;
+  }
+  
+  button:hover {
+    background: #0b95e9;
+  }
+  
+  
+  #info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  #player {
+    font-weight: bold;
+    color: #4CAF50; /* Green */
+  }
+  
+  #info-display {
+    margin-top: 10px;
+    font-style: italic;
+    color: #555;
+  }
+  
+  .reset-button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  #gameboard {
     width: 640px;
     height: 640px;
-    
     display: flex;
     flex-wrap: wrap;
-
-}
-
-.square{
+    align-items: center;
+    border: 15px solid rgb(96, 59, 59);
+  }
+  
+  .square {
     height: 80px;
     width: 80px;
     position: relative;
-}
-
-.whiteSquare{
+  }
+  
+  .whiteSquare {
     background-color: rgb(254, 255, 255);
-}
-
-.blackSquare{
+  }
+  
+  .blackSquare {
     background-color: rgb(5, 5, 5);
-}
-
-
-.square svg{
+  }
+  
+  .square svg {
     height: 60px;
     width: 60px;
     margin: 5px;
     position: relative;
     z-index: -9;
-
-}
-
-.black{
-    fill: rgb(110, 12, 12);
-}
-
-.white{
+  }
+  
+  .black {
+    fill: rgb(161, 12, 12);
+  }
+  
+  .white {
     fill: rgb(225, 245, 191);
-    
-}
-
-path {
+  }
+  
+  path {
     position: relative;
     z-index: -10;
-}
-
-.piece {
+  }
+  
+  .piece {
     position: relative;
     z-index: 9;
-}
+  }
+  

@@ -8,12 +8,28 @@
     <title>Chess</title>
  </head>
  <body>
-    <div id="gameboard"></div>
-    <p>It is <span id="player"></span>'s go.</p>
-    <p id="info-display"></p>
-
-    
-    <script src="./script/pieces.js"></script>
-    <script src="./script/app.js"></script>
+   <h1>Welcome to the Chess Game</h1>
+   <div id="form-container">
+      <form id="name-form">
+         <label for="white-name">White Player Name:</label>  
+         <input type="text" id="white-name" required>
+         
+         <label for="black-name">Black Player Name:</label>
+         <input type="text" id="black-name" required>  
+         
+         <button type="submit">Start Game</button>
+      </form>
+   </div>
+   <div id="info">
+      <p>It is <span id="player"></span>'s go.</p>
+      <p id="info-display"></p>
+      <div class="player">White player: <span id="white-player"></span></div>
+      <div class="player">Black player: <span id="black-player"></span></div>
+      <button class="reset-button" onclick="reset()">Reset Board</button>
+   </div>
+   <div id="gameboard"></div>
+   <script src="./script/start.js"></script>
+   <script src="./script/pieces.js"></script>
+   <script src="./script/app.js"></script>
  </body>
  </html>
