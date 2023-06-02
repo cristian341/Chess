@@ -368,12 +368,14 @@ function changePlayer() {
     if(playerGo === "black"){
         reverseIds()
         playerGo = "white"
+        document.getElementById("playerTurn").style.color = "black"
         document.body.style.backgroundColor = playerGo;
 
     } else if (playerGo === "white") {
         revertIds()
         playerGo = "black"
        // playerDisplay.textContent = 'black'
+       document.getElementById("playerTurn").style.color = "white"
         document.body.style.backgroundColor = playerGo;
     }
 }
