@@ -4,7 +4,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh; /* set the height of the body to the full viewport height */
-    background-image: url(js/wallpaper.jpg);
+    background-image: url(wallpaper.jpg);
 
   }
   form {
