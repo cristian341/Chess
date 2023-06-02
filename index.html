@@ -11,16 +11,19 @@
  <body>
    <h1>Welcome to the Chess Game</h1>
    <div id="form-container">
-      <form id="name-form">
+      <form id="name-form" onsubmit="inputValidate(event)">
          <label for="white-name">White Player Name:</label>  
          <input type="text" id="white-name" required>
          
          <label for="black-name">Black Player Name:</label>
          <input type="text" id="black-name" required>  
-         
-         <button type="submit">Start Game</button>
+         <div class="button-container">
+            <button type="buttton" onclick="clearInput()">Clear</button>
+            <button type="submit">Start Game</button>
+         </div>
       </form>
    </div>
+
    <div id="info">
       <p>It is <span id="player"></span>'s go.</p>
       <p id="info-display"></p>
@@ -29,6 +32,7 @@
       <button class="reset-button" onclick="reset()">Reset Board</button>
    </div>
    <div id="gameboard"></div>
+
    <script src="./script/start.js"></script>
    <script src="./script/pieces.js"></script>
    <script src="./script/app.js"></script>

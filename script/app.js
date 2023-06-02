@@ -392,7 +392,7 @@ function revertIds() {
 
 
 function checkForWin(){
-    const winSound = new Audio('../sound/winning.mp3')
+    const winSound = new Audio('js/sound/winning.mp3')
     const kings = Array.from(document.querySelectorAll('#king'))
     if (!kings.some(king => king.firstChild.classList.contains("white"))) {
         infoDisplay.innerHTML = "Black player wins!"

@@ -1,20 +1,31 @@
 document.getElementById("gameboard").style.display = "none"
 document.getElementById("info").style.display = "none"
 
-const form = document.getElementById("name-form")
-form.addEventListener("submit", e => {
-    e.preventDefault();
-    const whitePlayer = document.getElementById("white-name").value;   
-    const blackPlayer = document.getElementById("black-name").value;
+function inputValidate(event) {
+  event.preventDefault(); // Prevents the default form submission
+
+  const whitePlayerInput = document.getElementById("white-name");
+  const blackPlayerInput = document.getElementById("black-name");
   
-    if (whitePlayer === "" || blackPlayer === "") {
-      alert("Please enter both player names");
-      return;
-    } else{
-        this.document.getElementById("white-player").textContent = whitePlayer;
-        this.document.getElementById("black-player").textContent = blackPlayer;
-        document.getElementById("form-container").style.display = "none";
-        document.getElementById("gameboard").style.display = "flex";
-        document.getElementById("info").style.display = "block";
-    }
-  });
+  const whitePlayer = whitePlayerInput.value.trim();
+  const blackPlayer = blackPlayerInput.value.trim();
+
+  const nameRegex = /^[a-zA-Z\s]+$/; // Regex to match only letters and whitespace
+
+  if (!nameRegex.test(whitePlayer) || !nameRegex.test(blackPlayer)) {
+    const errorSound = new Audio('js/sound/error.wav')
+    setTimeout(() => alert("Please enter valid player name, with only letters and spaces."), 500 )
+    return;
+  }
+  document.body.style.backgroundImage = "none";
+  document.getElementById("white-player").textContent = whitePlayer;
+  document.getElementById("black-player").textContent = blackPlayer;
+  document.getElementById("form-container").style.display = "none";
+  document.getElementById("gameboard").style.display = "flex";
+  document.getElementById("info").style.display = "block";
+}
+
+function clearInput() {
+  document.getElementById("white-name").value = "";
+  document.getElementById("black-name").value = "";
+}
