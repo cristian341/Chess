@@ -14,6 +14,7 @@ function inputValidate(event) {
 
   if (!nameRegex.test(whitePlayer) || !nameRegex.test(blackPlayer)) {
     const errorSound = new Audio('sound/error.wav')
+    errorSound.play()
     setTimeout(() => alert("Please enter valid player name, with only letters and spaces."), 500 )
     return;
   }
