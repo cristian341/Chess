@@ -365,17 +365,23 @@ function checkIfValid(target){
 }
 
 function changePlayer() {
+    const playerElements = document.getElementsByClassName("player");
     if(playerGo === "black"){
         reverseIds()
-        playerGo = "white"
-        document.getElementById("playerTurn").style.color = "black"
+        playerGo = "white";
+        document.getElementById("playerTurn").style.color = "black";
+        for (let i = 0; i < playerElements.length; i++) {
+            playerElements[i].style.color = "black";
+          }
         document.body.style.backgroundColor = playerGo;
 
     } else if (playerGo === "white") {
         revertIds()
         playerGo = "black"
-       // playerDisplay.textContent = 'black'
-       document.getElementById("playerTurn").style.color = "white"
+        document.getElementById("playerTurn").style.color = "white"
+        for (let i = 0; i < playerElements.length; i++) {
+            playerElements[i].style.color = "white";
+          }
         document.body.style.backgroundColor = playerGo;
     }
 }

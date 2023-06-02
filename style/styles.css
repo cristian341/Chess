@@ -24,6 +24,8 @@ form {
 label {
   color: #555;
   margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 input,
@@ -58,6 +60,10 @@ button:hover {
 }
 
 #playerTurn {
+  font-size: 20px;
+  font-weight: bold;
+}
+.player{
   font-size: 20px;
   font-weight: bold;
 }
