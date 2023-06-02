@@ -13,7 +13,7 @@ function inputValidate(event) {
   const nameRegex = /^[a-zA-Z\s]+$/; // Regex to match only letters and whitespace
 
   if (!nameRegex.test(whitePlayer) || !nameRegex.test(blackPlayer)) {
-    const errorSound = new Audio('js/sound/error.wav')
+    const errorSound = new Audio('/sound/error.wav')
     setTimeout(() => alert("Please enter valid player name, with only letters and spaces."), 500 )
     return;
   }
