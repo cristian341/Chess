@@ -4,7 +4,8 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-image: url(images/wallpaper.jpg);
+  /* background-image: url(images/wallpaper.jpg); */
+  background-image: url("https://wallpapercave.com/wp/baUGRjh.jpg");
 }
 
 form {
