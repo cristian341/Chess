@@ -5,7 +5,7 @@ body {
   align-items: center;
   min-height: 100vh;
   /* background-image: url(images/wallpaper.jpg); */
-  background-image: url("images/wallpaper.jpg");
+  background-image: url("https://wallpapercave.com/wp/wp2883266.jpg");
 }
 
 form {
@@ -69,11 +69,11 @@ button:hover {
   font-weight: bold;
 }
 
-/* #info-display {
+#info-display {
   margin-top: 10px;
   font-style: italic;
   color: #555;
-} */
+}
 
 .reset-button {
   background-color: #4caf50;
