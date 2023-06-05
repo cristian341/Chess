@@ -410,7 +410,7 @@ function checkForWin() {
       winSound.play();
       setTimeout(() => {
         document.getElementById("info-display").style.color = "black"
-        document.getElementById("info-display").innerHTML = `${document.getElementById("white-player").textContent} won!!!`;
+        document.getElementById("info-display").innerHTML = `${document.getElementById("black-player").textContent} won!!!`;
       }, 500);
       document.getElementById("playerTurn").style.display = "none";
       for(let i = 0; i<playerInfo.length;i++){
@@ -424,7 +424,7 @@ function checkForWin() {
       winSound.play();
       setTimeout(() => {
         document.getElementById("info-display").style.color = "white"
-        document.getElementById("info-display").innerHTML = `${document.getElementById("black-player").textContent} won!!!`;
+        document.getElementById("info-display").innerHTML = `${document.getElementById("white-player").textContent} won!!!`;
       }, 500);
       document.getElementById("playerTurn").style.display = "none";
       for(let i = 0; i<playerInfo.length;i++){
