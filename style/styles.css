@@ -70,9 +70,8 @@ button:hover {
 }
 
 #info-display {
-  margin-top: 10px;
-  font-style: italic;
-  color: #555;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .reset-button {

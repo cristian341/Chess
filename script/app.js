@@ -101,7 +101,7 @@ function dragDrop(e) {
 
         else if (taken && !takenByOpponent){
             errorSound.play()
-            setTimeout(() => alert("You cannont move here"), 2000 )
+            setTimeout(() => alert("You cannont move there"), 2000 )
             return
         }
 
@@ -381,38 +381,70 @@ function revertIds() {
 }
 
 
-function checkForWin(){
+// function checkForWin(){
+//     const winSound = new Audio('sound/winning.mp3');
+//     const kings = Array.from(document.querySelectorAll('#king'));
+//     if (!kings.some(king => king.firstChild.classList.contains("white"))) {
+//         const allSquares = document.querySelectorAll(".square");
+//         allSquares.forEach(square => square.firstChild?.setAttribute("draggable", false));
+//         winSound.play();
+//         setTimeout(() => alert(`${document.getElementById("white-player").textContent} won!!!`), 500 );
+//         celebrateWin()
+//     }
+//     if (!kings.some(king => king.firstChild.classList.contains("black"))) {
+//         const allSquares = document.querySelectorAll(".square");
+//         allSquares.forEach(square => square.firstChild?.setAttribute("draggable", false));
+//         winSound.play();
+//         setTimeout(() => alert(`${document.getElementById("black-player").textContent} won!!!`), 500 );
+//         celebrateWin()
+//     }
+// }
+
+function checkForWin() {
     const winSound = new Audio('sound/winning.mp3');
     const kings = Array.from(document.querySelectorAll('#king'));
+    const playerInfo = document.getElementsByClassName("player")
     if (!kings.some(king => king.firstChild.classList.contains("white"))) {
-        const allSquares = document.querySelectorAll(".square");
-        allSquares.forEach(square => square.firstChild?.setAttribute("draggable", false));
-        winSound.play();
-        setTimeout(() => alert(`${blackPlayer} won!!!`), 500 );
-        celebrateWin()
+      const allSquares = document.querySelectorAll(".square");
+      allSquares.forEach(square => square.firstChild?.setAttribute("draggable", false));
+      winSound.play();
+      setTimeout(() => {
+        document.getElementById("info-display").style.color = "black"
+        document.getElementById("info-display").innerHTML = `${document.getElementById("white-player").textContent} won!!!`;
+      }, 500);
+      document.getElementById("playerTurn").style.display = "none";
+      for(let i = 0; i<playerInfo.length;i++){
+        playerInfo[i].style.display = "none"
+      }
+      celebrateWin();
     }
     if (!kings.some(king => king.firstChild.classList.contains("black"))) {
-        const allSquares = document.querySelectorAll(".square");
-        allSquares.forEach(square => square.firstChild?.setAttribute("draggable", false));
-        winSound.play();
-        setTimeout(() => alert(`${whitePlayer} won!!!`), 500 );
-        celebrateWin()
+      const allSquares = document.querySelectorAll(".square");
+      allSquares.forEach(square => square.firstChild?.setAttribute("draggable", false));
+      winSound.play();
+      setTimeout(() => {
+        document.getElementById("info-display").style.color = "white"
+        document.getElementById("info-display").innerHTML = `${document.getElementById("black-player").textContent} won!!!`;
+      }, 500);
+      document.getElementById("playerTurn").style.display = "none";
+      for(let i = 0; i<playerInfo.length;i++){
+        playerInfo[i].style.display = "none"
+      }
+      celebrateWin();
     }
-}
-
-function reset(){
-    window.location.reload();
-}
-
-function celebrateWin() {
-    // Configure the confetti options
-    const confettiConfig = {
-      particleCount: 100, // Number of confetti particles
-      spread: 160, // Spread of confetti particles
-      colors: ['#ff0000', '#00ff00', '#0000ff'], // Colors of confetti particles
-    };
-  
-    // Trigger the confetti effect
-    confetti(confettiConfig);
   }
   
+function reset(){
+    location.reload(true)
+}
+
+function celebrateWin(){
+    let confetti = new Confetti('demo');
+
+// Edit given parameters
+    confetti.setCount(75);
+    confetti.setSize(1);
+    confetti.setPower(25);
+    confetti.setFade(false);
+    confetti.destroyTarget(true);
+}
