@@ -380,26 +380,6 @@ function revertIds() {
 
 }
 
-
-// function checkForWin(){
-//     const winSound = new Audio('sound/winning.mp3');
-//     const kings = Array.from(document.querySelectorAll('#king'));
-//     if (!kings.some(king => king.firstChild.classList.contains("white"))) {
-//         const allSquares = document.querySelectorAll(".square");
-//         allSquares.forEach(square => square.firstChild?.setAttribute("draggable", false));
-//         winSound.play();
-//         setTimeout(() => alert(`${document.getElementById("white-player").textContent} won!!!`), 500 );
-//         celebrateWin()
-//     }
-//     if (!kings.some(king => king.firstChild.classList.contains("black"))) {
-//         const allSquares = document.querySelectorAll(".square");
-//         allSquares.forEach(square => square.firstChild?.setAttribute("draggable", false));
-//         winSound.play();
-//         setTimeout(() => alert(`${document.getElementById("black-player").textContent} won!!!`), 500 );
-//         celebrateWin()
-//     }
-// }
-
 function checkForWin() {
     const winSound = new Audio('sound/winning.mp3');
     const kings = Array.from(document.querySelectorAll('#king'));
@@ -439,12 +419,38 @@ function reset(){
 }
 
 function celebrateWin(){
-    let confetti = new Confetti('demo');
-
-// Edit given parameters
-    confetti.setCount(75);
-    confetti.setSize(1);
-    confetti.setPower(25);
-    confetti.setFade(false);
-    confetti.destroyTarget(true);
+    let count = 200;
+    let defaults = {
+      origin: { y: 0.7 }
+    };
+    
+    function fire(particleRatio, opts) {
+      confetti(Object.assign({}, defaults, opts, {
+        particleCount: Math.floor(count * particleRatio)
+      }));
+    }
+    
+    fire(0.25, {
+      spread: 26,
+      startVelocity: 55,
+    });
+    fire(0.2, {
+      spread: 60,
+    });
+    fire(0.35, {
+      spread: 100,
+      decay: 0.91,
+      scalar: 0.8
+    });
+    fire(0.1, {
+      spread: 120,
+      startVelocity: 25,
+      decay: 0.92,
+      scalar: 1.2
+    });
+    fire(0.1, {
+      spread: 120,
+      startVelocity: 45,
+    });
 }
+
